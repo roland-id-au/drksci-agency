@@ -1,100 +1,58 @@
 # drksci-agency
 
-AI-powered proposal generator using Presenton, deployed on Fly.io with drksci brand styling.
+Self-hosted Presenton deployment on Fly.io for AI-powered presentation generation.
 
-## Features
+## What is this?
 
-- 🤖 Self-hosted Presenton for AI-powered proposal generation
-- 📄 Multiple proposal templates (technical, business, research)
-- 🎨 Consistent drksci brand styling
-- 📊 Export to HTML and PDF
-- 🔧 Web UI and API interfaces
-- 🐳 Docker containerized deployment
-- 🚀 Deployed on Fly.io
+This repo deploys [Presenton](https://github.com/presenton/presenton) - an open-source AI presentation generator - to Fly.io at **studio.drksci.com**.
 
-## Quick Start
-
-### Local Development
+## Deploy to Fly.io
 
 ```bash
-# Install dependencies
-npm install
+# Clone this repo
+git clone https://github.com/roland-id-au/drksci-agency.git
+cd drksci-agency
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your API keys
-
-# Start development server
-npm run dev
-```
-
-### Deploy to Fly.io
-
-See [FLY_DEPLOYMENT.md](FLY_DEPLOYMENT.md) for detailed deployment instructions.
-
-```bash
+# Login to Fly.io
 fly auth login
+
+# Launch (creates app)
 fly launch --no-deploy
+
+# Set your API keys
 fly secrets set ANTHROPIC_API_KEY=your_key_here
+
+# Deploy
 fly deploy
 ```
 
-## Project Structure
-
-```
-drksci-agency/
-├── templates/           # Nunjucks templates for proposals
-├── config/              # Configuration files
-├── lib/                 # Core libraries
-│   ├── generator.js     # AI proposal generator
-│   ├── exporter.js      # HTML/PDF export
-│   └── templates.js     # Template manager
-├── proposals/           # Generated proposals output
-├── cli.js               # Command-line interface
-├── server.js            # Express API server
-└── build-proposals.js   # Batch generation
-```
+Full deployment instructions in [FLY_DEPLOYMENT.md](FLY_DEPLOYMENT.md).
 
 ## Usage
 
-### Web UI
-
-Visit https://studio.drksci.com (or your deployed URL) to use the web interface.
-
-### API
-
-Presenton API endpoint:
+Once deployed, use Presenton's API:
 
 ```bash
 curl -X POST https://studio.drksci.com/api/v1/ppt/presentation/generate \
   -H "Content-Type: application/json" \
   -d '{
-    "topic": "AI-powered customer insights",
+    "topic": "AI in Healthcare",
     "slides": 10,
     "language": "en",
-    "tone": "professional"
+    "format": "pptx"
   }'
 ```
 
-## Templates
-
-Available proposal templates:
-
-- **technical**: Technical architecture and implementation proposals
-- **business**: Business cases and strategic proposals
-- **research**: Research proposals and grant applications
-- **pitch**: Startup pitch decks and investor proposals
-- **consulting**: Consulting engagement proposals
-
 ## Configuration
 
-Edit `config/defaults.json` to customize:
+Presenton supports multiple AI providers. Set via Fly.io secrets:
 
-- Default tone and style
-- Section templates
-- Brand colors and fonts
-- Export settings
+```bash
+fly secrets set ANTHROPIC_API_KEY=your_key
+fly secrets set OPENAI_API_KEY=your_key
+fly secrets set GOOGLE_API_KEY=your_key
+```
 
 ## License
 
-Private - drksci
+This deployment config is MIT. Presenton itself is Apache 2.0.

@@ -1,23 +1,9 @@
 {
   "name": "drksci-agency",
   "version": "0.1.0",
-  "description": "AI-powered proposal generator for drksci",
+  "description": "Presenton deployment on Fly.io for drksci",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js",
-    "build": "echo 'No build step required'",
-    "generate": "node cli.js"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.1",
-    "express": "^4.18.2",
-    "marked": "^16.0.0",
-    "nunjucks": "^3.2.4",
-    "commander": "^12.0.0",
-    "dotenv": "^16.4.5"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.3"
+    "start": "echo 'This runs Presenton via Docker - use fly deploy'"
   }
 }

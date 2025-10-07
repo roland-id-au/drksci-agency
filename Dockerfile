@@ -1,31 +1,21 @@
-# Use official Presenton base or build from scratch
+# Official Presenton Dockerfile
 FROM node:20-slim
 
 WORKDIR /app
 
-# Install dependencies for Presenton
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
-    python3 \
-    python3-pip \
-    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Clone Presenton (we'll use the official repo)
-RUN git clone https://github.com/presenton/presenton.git /presenton
+# Clone Presenton official repository
+RUN git clone https://github.com/presenton/presenton.git /app
 
-WORKDIR /presenton
-
-# Install Presenton dependencies
+# Install dependencies
 RUN npm install
 
-# Copy our custom configuration
-COPY . /app
-
-# Environment variables will be set via Fly.io
-ENV NODE_ENV=production
+# Expose port
 ENV PORT=8080
-
 EXPOSE 8080
 
 # Start Presenton
