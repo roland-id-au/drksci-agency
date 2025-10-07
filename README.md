@@ -1,17 +1,20 @@
 # drksci-agency
 
-AI-powered proposal generator leveraging the drksci-landing style and Presenton-inspired architecture.
+AI-powered proposal generator using Presenton, deployed on Fly.io with drksci brand styling.
 
 ## Features
 
-- 🤖 AI-powered proposal generation using Claude/GPT
+- 🤖 Self-hosted Presenton for AI-powered proposal generation
 - 📄 Multiple proposal templates (technical, business, research)
 - 🎨 Consistent drksci brand styling
 - 📊 Export to HTML and PDF
-- 🔧 CLI and API interfaces
-- 🔒 Privacy-focused with local data processing
+- 🔧 Web UI and API interfaces
+- 🐳 Docker containerized deployment
+- 🚀 Deployed on Fly.io
 
 ## Quick Start
+
+### Local Development
 
 ```bash
 # Install dependencies
@@ -21,11 +24,19 @@ npm install
 cp .env.example .env
 # Edit .env with your API keys
 
-# Generate a proposal via CLI
-npm run generate -- --type technical --topic "AI-powered customer insights platform"
-
 # Start development server
 npm run dev
+```
+
+### Deploy to Fly.io
+
+See [FLY_DEPLOYMENT.md](FLY_DEPLOYMENT.md) for detailed deployment instructions.
+
+```bash
+fly auth login
+fly launch --no-deploy
+fly secrets set ANTHROPIC_API_KEY=your_key_here
+fly deploy
 ```
 
 ## Project Structure
@@ -46,38 +57,22 @@ drksci-agency/
 
 ## Usage
 
-### CLI
+### Web UI
 
-```bash
-# Generate a technical proposal
-node cli.js generate --type technical --topic "Your topic here"
-
-# Generate with custom parameters
-node cli.js generate \
-  --type business \
-  --topic "Market expansion strategy" \
-  --client "Acme Corp" \
-  --sections 5 \
-  --tone professional
-
-# List available templates
-node cli.js list-templates
-```
+Visit https://studio.drksci.com (or your deployed URL) to use the web interface.
 
 ### API
 
-```bash
-# Start the server
-npm run dev
+Presenton API endpoint:
 
-# POST to /api/generate
-curl -X POST http://localhost:3000/api/generate \
+```bash
+curl -X POST https://studio.drksci.com/api/v1/ppt/presentation/generate \
   -H "Content-Type: application/json" \
   -d '{
-    "type": "technical",
-    "topic": "Cloud migration strategy",
-    "client": "Example Corp",
-    "sections": 6
+    "topic": "AI-powered customer insights",
+    "slides": 10,
+    "language": "en",
+    "tone": "professional"
   }'
 ```
 

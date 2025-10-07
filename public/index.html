@@ -218,10 +218,17 @@
       submitBtn.disabled = true;
 
       try {
-        const response = await fetch('/api/generate', {
+        const response = await fetch('/api/v1/ppt/presentation/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify({
+            topic: data.topic,
+            slides: parseInt(data.sections),
+            language: 'en',
+            tone: data.tone,
+            client: data.client || undefined,
+            context: data.context || undefined
+          })
         });
 
         const json = await response.json();

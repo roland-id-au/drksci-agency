@@ -7,4 +7,4 @@ dist/
 build/
 proposals/*.html
 proposals/*.pdf
-.vercel
+.fly/
