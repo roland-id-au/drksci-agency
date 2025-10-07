@@ -1,0 +1,10 @@
+node_modules/
+.env
+output/
+*.log
+.DS_Store
+dist/
+build/
+proposals/*.html
+proposals/*.pdf
+.vercel

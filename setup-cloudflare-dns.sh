@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Cloudflare DNS Setup Script for studio.drksci.com
+# This script helps you configure the DNS record via Cloudflare Dashboard
+
+echo "🔧 Cloudflare DNS Configuration for studio.drksci.com"
+echo ""
+echo "Vercel requires the following DNS record:"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  Type:    A"
+echo "  Name:    studio"
+echo "  Content: 76.76.21.21"
+echo "  Proxy:   ✓ Proxied (Orange Cloud)"
+echo "  TTL:     Auto"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "📋 To configure via Cloudflare Dashboard:"
+echo ""
+echo "1. Go to: https://dash.cloudflare.com"
+echo "2. Select domain: drksci.com"
+echo "3. Navigate to: DNS → Records"
+echo "4. Click: Add Record"
+echo "5. Enter the details above"
+echo "6. Click: Save"
+echo ""
+echo "⚡ Alternative: Use Cloudflare API"
+echo ""
+echo "If you have your Cloudflare API token, you can use this curl command:"
+echo ""
+echo "Read the full token from ~/.wrangler directory or create one at:"
+echo "https://dash.cloudflare.com/profile/api-tokens"
+echo ""
+echo "Then run:"
+echo ""
+echo 'curl -X POST "https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/dns_records" \'
+echo '  -H "Authorization: Bearer YOUR_API_TOKEN" \'
+echo '  -H "Content-Type: application/json" \'
+echo '  --data '"'"'{"type":"A","name":"studio","content":"76.76.21.21","ttl":1,"proxied":true}'"'"
+echo ""
+echo "🔍 To find your Zone ID:"
+echo "Go to: https://dash.cloudflare.com → drksci.com → Overview (right sidebar)"
+echo ""
+echo "✅ Once configured, verify with:"
+echo "   dig studio.drksci.com"
+echo "   curl https://studio.drksci.com/api/health"
+echo ""
