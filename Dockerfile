@@ -1,22 +1,6 @@
-# Official Presenton Dockerfile
-FROM node:20-slim
+# Use official Presenton Docker image
+FROM ghcr.io/presenton/presenton:latest
 
-WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Clone Presenton official repository
-RUN git clone https://github.com/presenton/presenton.git /app
-
-# Install dependencies
-RUN npm install
-
-# Expose port
-ENV PORT=8080
-EXPOSE 8080
-
-# Start Presenton
-CMD ["npm", "start"]
+# Expose port 80 (Presenton's default)
+ENV PORT=80
+EXPOSE 80
